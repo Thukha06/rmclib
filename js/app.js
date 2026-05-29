@@ -187,7 +187,7 @@ let RemoteData = 'songs/index.yaml';
 const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Thukha06/rakhine-music-library/';
 
 function asset(path) {
-  return CDN_BASE + path;
+  return CDN_BASE + path + '?v=' + Date.now();
 }
 
 /* ────────────────────────────────────
