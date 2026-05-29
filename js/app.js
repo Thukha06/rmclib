@@ -184,7 +184,7 @@ let currentAudioBtn = null;
 let localData = 'data/index.yaml';
 let RemoteData = 'songs/index.yaml';
 
-const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Thukha06/rakhine-music-library@refs/heads/main/';
+const CDN_BASE = 'https://cdn.jsdelivr.net/gh/Thukha06/rakhine-music-library/';
 
 function asset(path) {
   return CDN_BASE + path;

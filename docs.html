@@ -97,7 +97,7 @@
       <p class="docs-lead">
         RMCLib is a fully static, YAML-driven guitar chord and lyrics website.
         There is no server, no database, and no build step — just HTML, CSS, and
-        vanilla JavaScript that reads a single <span class="docs-code">songs.yaml</span>
+        vanilla JavaScript that reads a single <span class="docs-code">index.yaml</span>
         file to power the entire library.
       </p>
     </div>
@@ -115,7 +115,7 @@
         ├── js/ <br>
         │&emsp;&emsp;└── <span class="s">app.js</span><span class="c">&nbsp;← YAML parser, cards, filters, audio, lightbox</span><br>
         ├── data/ <br>
-        │&emsp;&emsp;└── <span class="s">songs.yaml</span><span class="c">&nbsp;← ⭐ All song data lives here</span><br>
+        │&emsp;&emsp;└── <span class="s">index.yaml</span><span class="c">&nbsp;← ⭐ All song data lives here</span><br>
         ├── images/ <br>
         │&emsp;&emsp;└── <span class="s">*.jpg / *.png</span><span class="c">&nbsp;← Cover art (referenced in songs.yaml)</span><br>
         └── audio/ <br>
@@ -126,18 +126,20 @@
     <div id="running-locally" class="docs-section">
       <h2 class="docs-h2">Running Locally</h2>
       <p class="docs-p">
-        Because <span class="docs-code">songs.yaml</span> is loaded via
+        Because <span class="docs-code">index.yaml</span> is loaded via
         <span class="docs-code">fetch()</span>, browsers block requests over the
         <span class="docs-code">file://</span> protocol. You must serve the site
         through a local HTTP server.
       </p>
 
       <h3 class="docs-h3">Python (built-in, recommended)</h3>
-      <div class="docs-pre"><span class="c"># Python 3</span>
-python3 -m http.server 8080
+      <div class="docs-pre">
+        <span class="c"># Python 3</span><br>
+        python3 -m http.server 8080 <br>
 
-<span class="c"># Then open:</span>
-http://localhost:8080</div>
+        <span class="c"># Then open:</span><br>
+        http://localhost:8080
+      </div>
 
       <h3 class="docs-h3">Node.js</h3>
       <div class="docs-pre">npx serve .</div>
@@ -157,24 +159,24 @@ http://localhost:8080</div>
         worrying about trailing commas.
       </p>
       <p class="docs-p">
-        The file at <span class="docs-code">data/songs.yaml</span> contains a
+        The file at <span class="docs-code">data/index.yaml</span> contains a
         single top-level key <span class="docs-code">songs</span> whose value is
         a list of song objects.
       </p>
 
       <div class="docs-pre">
-        <span class="c"># data/songs.yaml</span><br>
+        <span class="c"># data/index.yaml</span><br>
         <span class="k">songs</span><span class="p">:</span><br>
         <span class="p">-</span> <span class="k">id</span><span class="p">:</span> <span class="s">my-song</span><br>
-        &emsp;<span class="k">artist</span><span class="p">:</span> <span class="s">Artist Name</span><br>
-        &emsp;<span class="k">genre</span><span class="p">:</span> <span class="s">Rock</span><br>
-        &emsp;<span class="k">difficulty</span><span class="p">:</span> <span class="s">Beginner</span><br>
-        &emsp;<span class="k">key</span><span class="p">:</span> <span class="s">G</span><br>
-        &emsp;<span class="k">bpm</span><span class="p">:</span> <span class="n">120</span><br>
-        &emsp;<span class="k">title</span><span class="p">:</span> <span class="s">My Song Title</span><br>
-        &emsp;<span class="k">description</span><span class="p">:</span> <span class="s">A short sentence shown on the card.</span><br>
-        &emsp;<span class="k">coverImage</span><span class="p">:</span> <span class="s">images/my-song.jpg</span><br>
-        &emsp;<span class="k">sections</span><span class="p">:</span> <span class="p">- ...</span>
+        &nbsp;&nbsp;<span class="k">artist</span><span class="p">:</span> <span class="s">Artist Name</span><br>
+        &nbsp;&nbsp;<span class="k">genre</span><span class="p">:</span> <span class="s">Rock</span><br>
+        &nbsp;&nbsp;<span class="k">difficulty</span><span class="p">:</span> <span class="s">Beginner</span><br>
+        &nbsp;&nbsp;<span class="k">key</span><span class="p">:</span> <span class="s">G</span><br>
+        &nbsp;&nbsp;<span class="k">bpm</span><span class="p">:</span> <span class="n">120</span><br>
+        &nbsp;&nbsp;<span class="k">title</span><span class="p">:</span> <span class="s">My Song Title</span><br>
+        &nbsp;&nbsp;<span class="k">description</span><span class="p">:</span> <span class="s">A short sentence shown on the card.</span><br>
+        &nbsp;&nbsp;<span class="k">coverImage</span><span class="p">:</span> <span class="s">images/my-song.jpg</span><br>
+        &nbsp;&nbsp;<span class="k">sections</span><span class="p">:</span> <span class="p">- ...</span>
       </div>
 
       <div class="docs-callout docs-callout-tip">
@@ -212,7 +214,7 @@ http://localhost:8080</div>
         <div class="docs-step">
           <div class="docs-step-num">01</div>
           <div class="docs-step-body">
-            <strong>Open <span class="docs-code">data/songs.yaml</span></strong>
+            <strong>Open <span class="docs-code">data/index.yaml</span></strong>
             <span>Add a new <span class="docs-code">-</span> item under the <span class="docs-code">songs:</span> key with the fields listed above.</span>
           </div>
         </div>
@@ -266,9 +268,10 @@ http://localhost:8080</div>
       <p class="docs-p">Use for any prose content — song history, technique descriptions, strumming patterns written out in plain text.</p>
       <div class="docs-pre">
         <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">text</span><br>
-        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">About This Song</span><br>
-        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">&gt;</span><br>
-        &emsp;&emsp;<span class="s">Written in 1968, this song was inspired by J.S. Bach's</span> <span class="s">Bourrée in E minor. &emsp;&emsp;The fingerpicking pattern...</span>
+        &nbsp;&nbsp;<span class="k">heading</span><span class="p">:</span> <span class="s">About This Song</span><br>
+        &nbsp;&nbsp;<span class="k">content</span><span class="p">:</span> <span class="p">&gt;</span><br>
+        &emsp;&emsp;<span class="s">Written in 1968, this song was inspired by J.S. Bach's</span> <span class="s">Bourrée in E minor. <br>
+        &emsp;&emsp;The fingerpicking pattern...</span>
       </div>
       <div class="docs-callout docs-callout-info">
         <span class="docs-callout-icon">ℹ</span>
@@ -287,9 +290,10 @@ http://localhost:8080</div>
       </p>
       <div class="docs-pre">
         <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">chords</span><br>
-        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chords Used</span><br>
-        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span> <span class="s">G | D | Em | C</span> 
-        <span class="s">All open chords in the key of G. <br>&emsp;No capo required.</span>
+        &nbsp;&nbsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chords Used</span><br>
+        &nbsp;&nbsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span><br>
+        &emsp;&emsp;<span class="s">G | D | Em | C</span><br>
+        &emsp;&emsp;<span class="s">All open chords in the key of G. No capo required.</span>
       </div>
     </div>
 
@@ -302,10 +306,10 @@ http://localhost:8080</div>
       </p>
       <div class="docs-pre">
         <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">lyrics</span><br>
-        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Verse 1</span><br>
-        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span>
-        &emsp;<span class="s">[G]Blackbird singing in the [Am]dead of night</span><br>
-        &emsp;<span class="s">[G/B]Take these [C]broken wings and learn to [D]fly</span>
+        &nbsp;&nbsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Verse 1</span><br>
+        &nbsp;&nbsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span><br>
+        &emsp;&emsp;<span class="s">[G]Blackbird singing in the [Am]dead of night</span><br>
+        &emsp;&emsp;<span class="s">[G/B]Take these [C]broken wings and learn to [D]fly</span>
       </div>
       <div class="docs-callout docs-callout-tip">
         <span class="docs-callout-icon">✓</span>
@@ -322,9 +326,9 @@ http://localhost:8080</div>
       </p>
       <div class="docs-pre">
         <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">audio</span><br>
-        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">"Demo Track – Verse"</span><br>
-        &emsp;<span class="k">description</span><span class="p">:</span> <span class="s">Strummed arrangement at 87 BPM.</span><br>
-        &emsp;<span class="k">src</span><span class="p">:</span> <span class="s">audio/my-song-verse.mp3</span>
+        &nbsp;&nbsp;<span class="k">heading</span><span class="p">:</span> <span class="s">"Demo Track – Verse"</span><br>
+        &nbsp;&nbsp;<span class="k">description</span><span class="p">:</span> <span class="s">Strummed arrangement at 87 BPM.</span><br>
+        &nbsp;&nbsp;<span class="k">src</span><span class="p">:</span> <span class="s">audio/my-song-verse.mp3</span>
       </div>
       <p class="docs-p" style="margin-top:16px;">
         Place <span class="docs-code">.mp3</span> files in the <span class="docs-code">audio/</span> folder. If a file is missing, the player shows a warning notice instead of breaking.
@@ -344,9 +348,9 @@ http://localhost:8080</div>
       </p>
       <div class="docs-pre">
         <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">image</span><br>
-        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chord Diagram</span><br>
-        &emsp;<span class="k">caption</span><span class="p">:</span> <span class="s">Finger position for the F#m barre chord.</span>  <span class="c"># optional</span><br>
-        &emsp;<span class="k">src</span><span class="p">:</span> <span class="s">images/fsharp-minor-diagram.png</span>
+        &nbsp;&nbsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chord Diagram</span><br>
+        &nbsp;&nbsp;<span class="k">caption</span><span class="p">:</span> <span class="s">Finger position for the F#m barre chord.</span>  <span class="c"># optional</span><br>
+        &nbsp;&nbsp;<span class="k">src</span><span class="p">:</span> <span class="s">images/fsharp-minor-diagram.png</span>
       </div>
     </div>
 
@@ -397,7 +401,7 @@ http://localhost:8080</div>
       <p class="docs-p">
         Filter buttons are generated automatically by scanning all unique
         <span class="docs-code">genre</span> and <span class="docs-code">difficulty</span>
-        values in <span class="docs-code">songs.yaml</span>. You never need to
+        values in <span class="docs-code">index.yaml</span>. You never need to
         edit any HTML or JavaScript to add a new filter — just add a new genre or
         difficulty to a song entry and the button appears.
       </p>
@@ -427,7 +431,8 @@ http://localhost:8080</div>
       </p>
 
       <h3 class="docs-h3">GitHub Pages</h3>
-      <div class="docs-pre"><span class="c"># Push to a GitHub repo, then enable Pages in Settings → Pages</span> <br>
+      <div class="docs-pre">
+        <span class="c"># Push to a GitHub repo, then enable Pages in Settings → Pages</span> <br>
         git init <br>
         git add . <br>
         git commit -m "Initial RMCLib site" <br>
@@ -521,13 +526,13 @@ http://localhost:8080</div>
       <h4>Site</h4>
       <ul>
         <li><a href="https://github.com/Thukha06/rmclib" style="color: #e8d5a3;">Github (Thukha06)</a></li>
-        <li><a href="index.html">Home</a></li>
         <li><a href="index.html#songs">Browse Songs</a></li>
+        <li><a href="index.html">Home</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 RMCLib — Rakhine Music &amp; Chord Library. Song copyrights belong to their respective owners.</p>
+    <p>© 2026 RMCLib — Rakhine Music &amp; Chord Library. Song copyrights belong to their respective owners.</p>
     <p>Built with HTML · CSS · Vanilla JS · Bootstrap 5 By <a href="https://github.com/Thukha06" style="color: #e8d5a3;">Thukha06</a></p>
   </div>
 </footer>
