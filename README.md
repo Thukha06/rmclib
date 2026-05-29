@@ -1,4 +1,4 @@
-# RMCLib — Static Rakhine Guitar Chord & Lyrics Library Site
+# RMCLib — Static Guitar Chord & Lyrics Library Site
 
 A fully static, YAML-driven guitar chord and lyrics library. No server, no database, no build step.
 
