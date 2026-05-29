@@ -1,20 +1,20 @@
-# Chord Atlas — Static Guitar Chord & Lyrics Site
+# RMCLib — Static Rakhine Guitar Chord & Lyrics Library Site
 
-A fully static, JSON-driven guitar chord and lyrics library. No server, no database, no build step.
+A fully static, YAML-driven guitar chord and lyrics library. No server, no database, no build step.
 
 ---
 
 ## Project Structure
 
 ```
-chordsite/
+rmclib/
 ├── index.html          ← Main page (hero + song cards + detail panel)
 ├── css/
 │   └── style.css       ← All styles (dark theme, responsive)
 ├── js/
 │   └── app.js          ← Song loading, filtering, detail panel, audio
 ├── data/
-│   └── songs.json      ← ⭐ All song data lives here
+│   └── index.yaml      ← ⭐ All song data lives here
 ├── images/
 │   └── *.jpg / *.png   ← Cover images (referenced in songs.json)
 ├── audio/
@@ -26,23 +26,23 @@ chordsite/
 
 ## How to Add a Song
 
-Open `data/songs.json` and add a new object inside the `"songs": [ ... ]` array.
+Open `data/index.yaml` and add a new object inside the `"songs": [ ... ]` array.
 
 ### Song Object Structure
 
-```json
-{
-  "id": "unique-song-id",
-  "title": "Song Title",
-  "artist": "Artist Name",
-  "genre": "Rock",
-  "difficulty": "Beginner",
-  "key": "G",
-  "bpm": 120,
-  "description": "Short description shown on the card.",
-  "coverImage": "images/my-cover.jpg",
-  "sections": [ ... ]
-}
+```yaml
+
+ - id: unique-song-id
+   title: Song Title
+   artist: Artist Name
+   genre: Rock
+   difficulty: Beginner
+   key: G
+   bpm: 120
+   description: Short description shown on the card.
+   coverImage: images/my-cover.jpg
+   sections: [ ... ]
+
 ```
 
 **difficulty** options: `Beginner` | `Intermediate` | `Advanced`
@@ -54,53 +54,53 @@ Open `data/songs.json` and add a new object inside the `"songs": [ ... ]` array.
 Each song has a `sections` array. You can mix and repeat any type in any order.
 
 ### Text Section
-```json
-{
-  "type": "text",
-  "heading": "About This Song",
-  "content": "Plain paragraph text here."
-}
+```yaml
+
+   type: text
+   heading: About This Song
+   content: Plain paragraph text here.
+
 ```
 
 ### Chords Section
-```json
-{
-  "type": "chords",
-  "heading": "Chords Used",
-  "content": "G | D | Em | C\n\nAdditional notes about the chords."
-}
+```yaml
+
+   type: chords
+   heading: Chords Used
+   content: G | D | Em | C\n\nAdditional notes about the chords.
+
 ```
 Chord names like `G`, `Am`, `F#m`, `Dsus4` are automatically highlighted.
 
 ### Lyrics Section
-```json
-{
-  "type": "lyrics",
-  "heading": "Verse 1",
-  "content": "[G]Words of the [D]verse\n[Em]More lyrics [C]here"
-}
+```yaml
+
+   type: lyrics
+   heading: Verse 1
+   content: [G]Words of the [D]verse\n[Em]More lyrics [C]here
+
 ```
 Chord markers `[G]` `[Am]` etc. are highlighted in gold automatically.
 
 ### Audio Section
-```json
-{
-  "type": "audio",
-  "heading": "Demo Track – Verse",
-  "description": "Strummed arrangement at 120 BPM.",
-  "src": "audio/my-song-demo.mp3"
-}
+```yaml
+
+   type: audio
+   heading: Demo Track – Verse
+   description: Strummed arrangement at 120 BPM.
+   src: audio/my-song-demo.mp3
+
 ```
 You can add **multiple audio sections** per song (e.g. verse, chorus, solo).
 
 ### Image Section
-```json
-{
-  "type": "image",
-  "heading": "Chord Diagram",
-  "caption": "Optional caption text.",
-  "src": "images/chord-diagram.png"
-}
+```yaml
+
+   type: image
+   heading: Chord Diagram
+   caption: Optional caption text.
+   src: images/chord-diagram.png
+
 ```
 
 ---
@@ -121,13 +121,13 @@ Place `.mp3` files in the `audio/` folder. If an audio file is missing, the play
 
 ## Filters
 
-Genre and difficulty filters are generated **automatically** from the songs in `songs.json`. No code changes needed — add a new genre or difficulty and the filter button appears.
+Genre and difficulty filters are generated **automatically** from the songs in `index.yaml`. No code changes needed — add a new genre or difficulty and the filter button appears.
 
 ---
 
 ## Running Locally
 
-Because `songs.json` is loaded via `fetch()`, you need a local HTTP server (browsers block `file://` fetch requests):
+Because `index.yaml` is loaded via `fetch()`, you need a local HTTP server (browsers block `file://` fetch requests):
 
 ```bash
 # Python 3
@@ -143,7 +143,7 @@ Then open: `http://localhost:8080`
 
 ## Deployment
 
-Upload the entire `chordsite/` folder to any static host:
+Upload the entire `rmclib/` folder to any static host:
 - GitHub Pages
 - Netlify (drag & drop)
 - Vercel
