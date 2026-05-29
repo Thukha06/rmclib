@@ -2,6 +2,8 @@
 
 A fully static, YAML-driven guitar chord and lyrics library. No server, no database, no build step.
 
+<img width="1911" height="918" alt="image" src="https://github.com/user-attachments/assets/c517e6f1-7ff2-4ff7-b2ab-c230756e29e3" />
+
 ---
 
 ## Project Structure
