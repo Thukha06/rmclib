@@ -1,0 +1,361 @@
+# ============================================================
+# RMCLib — Song Library
+# ============================================================
+# Each song is an item under the `songs` key.
+# Sections can be added in any order, any number of times.
+#
+# Section types: text | chords | lyrics | audio | image
+#
+# Difficulty: Beginner | Intermediate | Advanced
+# ============================================================
+
+songs:
+
+  - id: wonderwall
+    title: Wonderwall
+    artist: Oasis
+    genre: Rock
+    difficulty: Beginner
+    key: Em
+    bpm: 87
+    description: >
+      One of the most iconic songs of the 90s Britpop era. A timeless acoustic
+      classic with just a few chords that every guitarist should know.
+    coverImage: images/wonderwall.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Written by Noel Gallagher and released in 1995 on the album
+          (What's the Story) Morning Glory?, Wonderwall became an anthem for a
+          generation. The song uses a capo on the 2nd fret and relies on just
+          four chord shapes throughout.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          Em7 | G | Dsus4 | A7sus4
+
+          All chords are played with a capo on fret 2. These open chord shapes
+          are beginner-friendly and ring beautifully together.
+
+      - type: text
+        heading: Strumming Pattern
+        content: >
+          D - DU - UDU (repeat). Keep it loose and relaxed. Noel Gallagher
+          often plays with a fluid, almost nonchalant feel — don't over-pick it.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          [Em7]Today is gonna be the day
+          That they're gonna [G]throw it back to you
+          [Dsus4]By now you should've somehow
+          Realized [A7sus4]what you gotta do
+          [Em7]I don't believe that anybody
+          [G]Feels the way I do
+          [Dsus4]About you [A7sus4]now
+
+      - type: lyrics
+        heading: Chorus
+        content: |
+          And all the [G]roads we have to walk are [Dsus4]winding
+          And all the [G]lights that lead us there are [Dsus4]blinding
+          [G]There are many things that I
+          Would [Dsus4]like to say to you
+          But I don't know [A7sus4]how
+
+          Because [Em7]maybe
+          [G]You're gonna be the one that [Dsus4]saves me
+          [A7sus4]And after [Em7]all
+          [G]You're my wonder[Dsus4]wall [A7sus4]
+
+      - type: audio
+        heading: "Demo Track – Verse"
+        description: Listen to the verse chord progression at 87 BPM.
+        src: audio/wonderwall-demo.mp3
+
+      - type: audio
+        heading: "Demo Track – Chorus"
+        description: Listen to the full chorus with strumming pattern.
+        src: audio/wonderwall-chorus.mp3
+
+
+  - id: blackbird
+    title: Blackbird
+    artist: The Beatles
+    genre: Folk
+    difficulty: Intermediate
+    key: G
+    bpm: 96
+    description: >
+      Paul McCartney's fingerpicking masterpiece. A beautiful study in
+      alternating bass lines and melody played simultaneously.
+    coverImage: images/blackbird.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Blackbird was written by Paul McCartney in 1968 and features a unique
+          fingerpicking style where the thumb plays an alternating bass while the
+          fingers pick out the melody. It was inspired by J.S. Bach's Bourrée
+          in E minor.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          G | Am | G/B | C | C#dim | D | Dm | Em | F | Fadd9
+
+          The song doesn't use standard open chords alone — each chord shape
+          slides and evolves. Pay attention to the bass note movement.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          [G]Blackbird singing in the [Am]dead of night
+          [G/B]Take these [C]broken [C#dim]wings and learn to [G/D]fly
+          [D]All your [Dm]life
+          [C][B7][Bb][A7sus4]
+          You were only waiting for this [G]moment to a[C]rise
+
+      - type: text
+        heading: Fingerpicking Pattern
+        content: >
+          Use your thumb (p) on strings 6, 5, 4 for the bass, and index (i) and
+          middle (m) fingers for the treble strings. The pattern is: p-i-m-i
+          with the bass note anchoring each beat. Practice slowly — the
+          coordination takes time.
+
+      - type: audio
+        heading: "Demo Track – Intro & Verse"
+        description: Full fingerpicked arrangement of the verse at 96 BPM.
+        src: audio/blackbird-demo.mp3
+
+
+  - id: hallelujah
+    title: Hallelujah
+    artist: Leonard Cohen
+    genre: Folk
+    difficulty: Beginner
+    key: C
+    bpm: 63
+    description: >
+      One of the most covered songs in history. Cohen's spiritual masterpiece
+      flows naturally through a I-IV-V progression in C major with an
+      intimate, hymn-like feel.
+    coverImage: images/hallelujah.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Originally released in 1984, Hallelujah has been covered over 300
+          times. Leonard Cohen's version is slow and meditative. The song is
+          built on a simple I-IV-V-vi progression but the beauty is in the
+          vocal phrasing and lyrical depth.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          C | Am | F | G | Em
+
+          All standard open chords in the key of C. The movement from C to Am
+          and back creates the song's signature emotional pull.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          [C]I've heard there was a [Am]secret chord
+          That [C]David played, and it [Am]pleased the Lord
+          But [F]you don't really [G]care for music, [C]do you? [G]
+          It [C]goes like this, the [F]fourth, the [G]fifth
+          The [Am]minor fall, the [F]major lift
+          The [G]baffled king com[Em]posing Halle[Am]lujah
+
+      - type: lyrics
+        heading: Chorus
+        content: |
+          [F]Hallelujah, [Am]Hallelujah
+          [F]Hallelujah, [C]Halle[G]lu[C]jah
+
+      - type: audio
+        heading: "Demo Track – Full Song"
+        description: Gentle strummed arrangement at 63 BPM.
+        src: audio/hallelujah-demo.mp3
+
+
+  - id: hotel-california
+    title: Hotel California
+    artist: Eagles
+    genre: Rock
+    difficulty: Advanced
+    key: Bm
+    bpm: 75
+    description: >
+      An epic rock masterpiece featuring intricate arpeggiated guitar intro,
+      rich chord voicings, and one of the most celebrated guitar solos of
+      all time.
+    coverImage: images/hotel-california.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Released in 1977, Hotel California is played by Don Felder and Joe
+          Walsh on two separate guitars that interweave throughout the track.
+          The intro arpeggio is played fingerstyle and requires clean, even
+          picking across all strings.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          Bm | F#7 | A | E | G | D | Em | F#
+
+          The chord progression cycles through a dramatic i-V-VII-IV-VI-III-iv-V.
+          Pay special attention to the F#7 — it's the defining tension chord.
+
+      - type: text
+        heading: Intro Arpeggio Pattern
+        content: >
+          The iconic intro is a fingerpicked arpeggio over Bm. Pick strings
+          5-4-3-2-3-4 in a steady 12/8 feel. Keep your right hand anchored
+          lightly on the bridge for control. The pattern repeats through each
+          chord change without breaking.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          On a [Bm]dark desert highway, [F#7]cool wind in my hair
+          [A]Warm smell of colitas [E]rising up through the air
+          Up a[G]head in the distance, [D]I saw a shimmering light
+          My [Em]head grew heavy and my sight grew [F#]dim
+          I had to stop for the night
+
+      - type: lyrics
+        heading: Chorus
+        content: |
+          [G]Welcome to the Hotel Cali[D]fornia
+          Such a [F#]lovely place, such a lovely [Bm]face
+          [G]Plenty of room at the Hotel Cali[D]fornia
+          Any [Em]time of year, you can [F#]find it here
+
+      - type: audio
+        heading: "Demo Track – Intro Arpeggio"
+        description: Fingerpicked intro pattern through the full chord cycle.
+        src: audio/hotel-california-intro.mp3
+
+      - type: audio
+        heading: "Demo Track – Solo Section"
+        description: The legendary dual guitar outro solo breakdown.
+        src: audio/hotel-california-solo.mp3
+
+
+  - id: wish-you-were-here
+    title: Wish You Were Here
+    artist: Pink Floyd
+    genre: Rock
+    difficulty: Intermediate
+    key: G
+    bpm: 65
+    description: >
+      Pink Floyd's heartfelt tribute to Syd Barrett. The intro fingerpicking
+      pattern is one of the most recognizable in rock history.
+    coverImage: images/wish-you-were-here.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Written by Roger Waters and David Gilmour in 1975, the song opens
+          with a distinctive fingerpicked acoustic intro before transitioning
+          to a strummed section. The emotional weight lies as much in the space
+          between notes as the notes themselves.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          G | C | D | Am | Em
+
+          Simple open chords, but the intro uses a unique fingerpicked pattern
+          around the G and C shapes with hammer-ons and pull-offs built
+          into the melody.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          [C]So, so you think you can [D]tell
+          [Am]Heaven from hell, [G]blue skies from pain
+          [C]Can you tell a green [D]field
+          From a [Am]cold steel rail? [G]
+          A [C]smile from a veil? [D]
+          Do you think you can [Am]tell?
+
+      - type: lyrics
+        heading: Verse 2
+        content: |
+          [C]Did they get you to [D]trade
+          Your [Am]heroes for ghosts? [G]
+          [C]Hot ashes for [D]trees?
+          [Am]Hot air for a cool [G]breeze?
+          [C]Cold comfort for [D]change?
+          [Am]Did you exchange [G]
+          A walk-on part in the war
+          For a [D]lead role in a [Am]cage? [Em][G]
+
+      - type: audio
+        heading: "Demo Track – Intro Fingerpicking"
+        description: The iconic fingerpicked intro at full tempo.
+        src: audio/wish-you-were-here-demo.mp3
+
+
+  - id: knockin-on-heavens-door
+    title: "Knockin' on Heaven's Door"
+    artist: Bob Dylan
+    genre: Country Rock
+    difficulty: Beginner
+    key: G
+    bpm: 70
+    description: >
+      Perhaps the simplest and most powerful chord progression in rock. Four
+      chords, endless emotion — perfect first song for any beginner.
+    coverImage: images/knockin.jpg
+    sections:
+
+      - type: text
+        heading: About This Song
+        content: >
+          Written for the 1973 film Pat Garrett and Billy the Kid, this song
+          became one of Dylan's most enduring works. It has been covered by
+          Guns N' Roses, Eric Clapton, and countless others. The simplicity
+          is the point — the emotion comes entirely from the chords and lyrics.
+
+      - type: chords
+        heading: Chords Used
+        content: |
+          G | D | Am | C
+
+          The verse uses G-D-Am and the chorus alternates G-D-C. All open
+          chords, no capo needed. A perfect beginner song.
+
+      - type: lyrics
+        heading: Verse 1
+        content: |
+          [G]Mama, take this badge [D]off of me
+          [G]I can't use it [Am]anymore
+          [G]It's gettin' dark, [D]too dark to see
+          [G]I feel I'm knockin' [Am]on heaven's door
+
+      - type: lyrics
+        heading: Chorus
+        content: |
+          [G]Knock, knock, knockin' on [D]heaven's door
+          [G]Knock, knock, knockin' on [C]heaven's door
+          [G]Knock, knock, knockin' on [D]heaven's door
+          [G]Knock, knock, knockin' on [C]heaven's door
+
+      - type: audio
+        heading: "Demo Track – Full Arrangement"
+        description: Strummed arrangement through verse and chorus at 70 BPM.
+        src: audio/knockin-demo.mp3

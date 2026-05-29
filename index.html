@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RMCLib | Rakhine Music &amp; Chord Library</title>
+  <meta name="description" content="A curated library of guitar chord charts and lyrics. RMCLib — Rakhine Music & Chord Library.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HEADER
+════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+
+    <a href="index.html" class="logo" aria-label="ChordRMC Home">
+      <!-- SVG Logo mark — replace src below with your logo image file if uploaded -->
+      <img src="logo.svg" alt="RMC Logo" class="logo-img">
+      <div class="logo-text-wrap">
+        <span class="logo-mark">RMC<span>Lib</span></span>
+        <span class="logo-sub">Rakhine&nbsp;Music&nbsp;&amp;&nbsp;Chord&nbsp;Library</span>
+      </div>
+    </a>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html#songs">Library</a>
+      <a href="docs.html">Docs</a>
+      <a href="index.html#songs" class="nav-cta">Browse Songs</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Rakhine Music &amp; Chord</div>
+
+      <h1 class="hero-title">
+        Every chord.<br>
+        Every <em>lyric.</em><br>
+        One place.
+      </h1>
+
+      <p class="hero-desc">
+        RMCLib သည် chord ဇယားများ၊ သီချင်းစာသားများနှင့် စုစည်းထားသော Library တစ်ခုဖြစ်ပါတယ်။
+        ရခိုင်သီချင်းအမျိုးအစားအစုံအလင်ကို Beginner-Advanced တီးခတ်လို့အဆင်ပြေအောင် ဖန်တီးထားပါတယ်။ ကြိုက်နှစ်သက်ရာ သီချင်းကို ရွေးပြီး တီးခတ်နိုင်ပါတယ်။
+      </p>
+
+      <div class="hero-actions">
+        <a href="#songs" class="btn-primary">Browse Songs →</a>
+        <a href="docs.html" class="btn-ghost">Documentation</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="statSongs">—</span>
+          <span class="stat-label">Songs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="statGenres">—</span>
+          <span class="stat-label">Genres</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">3</span>
+          <span class="stat-label">Skill Levels</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative chord card -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="chord-diagram-stack">
+        <div class="chord-card-back"></div>
+        <div class="chord-card-back"></div>
+        <div class="chord-card-front">
+          <div class="cf-label">Chord · Em7</div>
+          <div class="cf-chord">Em7</div>
+          <div class="cf-name">E minor 7th · Open Position</div>
+          <div class="fretboard">
+            <div class="string-col">
+              <div class="fret-dot muted">✕</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+            <div class="string-col">
+              <div class="fret-dot active">2</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+            <div class="string-col">
+              <div class="fret-dot active">2</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+            <div class="string-col">
+              <div class="fret-dot active">0</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+            <div class="string-col">
+              <div class="fret-dot active">0</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+            <div class="string-col">
+              <div class="fret-dot active">0</div>
+              <div class="fret-dot">·</div>
+              <div class="fret-dot">·</div>
+            </div>
+          </div>
+          <div class="cf-tags">
+            <span class="cf-tag">Key of E</span>
+            <span class="cf-tag">Open</span>
+            <span class="cf-tag">Capo 2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     SONGS SECTION
+════════════════════════════════ -->
+<section class="songs-section" id="songs" aria-label="Song Library">
+
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">The Library</div>
+      <h2 class="section-title">Browse Songs</h2>
+    </div>
+    <span class="section-count">Loading…</span>
+  </div>
+
+  <div class="filter-bar" role="group" aria-label="Filter songs"></div>
+
+  <div class="songs-grid" id="songsGrid" role="list"></div>
+
+</section>
+
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <a href="index.html" class="logo logo-lg">
+        <img src="logo.svg" alt="RMC Logo" class="logo-img">
+        <div class="logo-text-wrap">
+          <span class="logo-mark">RMC<span>Lib</span></span>
+          <span class="logo-sub">Rakhine&nbsp;Music&nbsp;&amp;&nbsp;Chord&nbsp;Library</span>
+        </div>
+      </a>
+      <p>A YAML-powered guitar chord and lyrics library. Open, editable, and endlessly expandable.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Library</h4>
+      <ul>
+        <li><a href="#songs">All Songs</a></li>
+        <li><a href="#songs">Beginner</a></li>
+        <li><a href="#songs">Intermediate</a></li>
+        <li><a href="#songs">Advanced</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="docs.html">Documentation</a></li>
+        <li><a href="docs.html#adding-songs">Adding Songs</a></li>
+        <li><a href="docs.html#section-types">Section Types</a></li>
+        <li><a href="docs.html#deployment">Deployment</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Genres</h4>
+      <ul>
+        <li><a href="#songs">Pop</a></li>
+        <li><a href="#songs">Country</a></li>
+        <li><a href="#songs">Classical</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 RMCLib — Rakhine Music &amp; Chord Library. Song copyrights belong to their respective owners.</p>
+    <p>Built with HTML · CSS · Vanilla JS · Bootstrap 5</p>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════
+     SONG DETAIL PANEL
+════════════════════════════════ -->
+<div class="song-detail-overlay" id="songDetailOverlay" role="dialog" aria-modal="true" aria-label="Song detail">
+  <div class="overlay-backdrop" id="overlayBackdrop"></div>
+  <div class="song-detail-panel">
+    <div class="panel-header">
+      <div class="panel-breadcrumb">Library <span>/</span> Song Detail</div>
+      <button class="panel-close" onclick="closeDetail()" aria-label="Close panel">✕</button>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+     LIGHTBOX
+════════════════════════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">✕</button>
+    <div class="lightbox-img-wrap">
+      <div class="lightbox-img-skeleton" id="lightboxSkeleton"></div>
+      <img id="lightboxImg" src="" alt="" draggable="false">
+    </div>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Update hero stats once songs load
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new MutationObserver(() => {
+      const count = document.querySelectorAll('.song-card:not(.skeleton-card)').length;
+      if (count > 0) {
+        document.getElementById('statSongs').textContent = count;
+        const genres = new Set(window._allSongsRef?.map(s => s.genre).filter(Boolean));
+        const genreEl = document.getElementById('statGenres');
+        if (genreEl && genres.size) genreEl.textContent = genres.size;
+      }
+    });
+    const grid = document.getElementById('songsGrid');
+    if (grid) observer.observe(grid, { childList: true });
+  });
+</script>
+</body>
+</html>

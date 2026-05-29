@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RMCLib | Documentation</title>
+  <meta name="description" content="RMCLib documentation — how to add songs, manage sections, deploy, and customise your library.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HEADER (shared)
+════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="RMCLib Home">
+      <img src="logo.svg" alt="RMC Logo" class="logo-img">
+      <div class="logo-text-wrap">
+        <span class="logo-mark">RMC<span>Lib</span></span>
+        <span class="logo-sub">Rakhine&nbsp;Music&nbsp;&amp;&nbsp;Chord&nbsp;Library</span>
+      </div>
+    </a>
+
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html#songs">Library</a>
+      <a href="docs.html" style="color:var(--text);">Docs</a>
+      <a href="index.html#songs" class="nav-cta">Browse Songs</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════
+     DOCS LAYOUT
+════════════════════════════════ -->
+<div class="docs-layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a class="sidebar-link active" href="#introduction">Introduction</a>
+      <a class="sidebar-link" href="#structure">Project Structure</a>
+      <a class="sidebar-link" href="#running-locally">Running Locally</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Song Data</div>
+      <a class="sidebar-link" href="#yaml-format">YAML Format</a>
+      <a class="sidebar-link" href="#song-fields">Song Fields</a>
+      <a class="sidebar-link" href="#adding-songs">Adding Songs</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Section Types</div>
+      <a class="sidebar-link" href="#section-types">Overview</a>
+      <a class="sidebar-link" href="#sec-text">text</a>
+      <a class="sidebar-link" href="#sec-chords">chords</a>
+      <a class="sidebar-link" href="#sec-lyrics">lyrics</a>
+      <a class="sidebar-link" href="#sec-audio">audio</a>
+      <a class="sidebar-link" href="#sec-image">image</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Features</div>
+      <a class="sidebar-link" href="#image-optimization">Image Optimisation</a>
+      <a class="sidebar-link" href="#lightbox">Lightbox &amp; Zoom</a>
+      <a class="sidebar-link" href="#filters">Filters</a>
+      <a class="sidebar-link" href="#audio-player">Audio Player</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Deployment</div>
+      <a class="sidebar-link" href="#deployment">Deploying the Site</a>
+      <a class="sidebar-link" href="#custom-logo">Custom Logo</a>
+    </div>
+
+  </aside>
+
+
+  <!-- ── Content ── -->
+  <main class="docs-content" role="main">
+
+    <!-- ─── Introduction ─── -->
+    <div id="introduction" class="docs-section">
+      <div class="docs-hero-tag">RMCLib Documentation</div>
+      <h1 class="docs-h1">How RMCLib works</h1>
+      <p class="docs-lead">
+        RMCLib is a fully static, YAML-driven guitar chord and lyrics website.
+        There is no server, no database, and no build step — just HTML, CSS, and
+        vanilla JavaScript that reads a single <span class="docs-code">songs.yaml</span>
+        file to power the entire library.
+      </p>
+    </div>
+
+    <!-- ─── Project Structure ─── -->
+    <div id="structure" class="docs-section">
+      <h2 class="docs-h2">Project Structure</h2>
+      <p class="docs-p">All site files live in a single flat directory:</p>
+      <div class="docs-pre">
+        <span class="c">rmclib/</span><br>
+        ├── <span class="s">index.html</span><span class="c">&nbsp;← Main page (hero, song cards, detail panel)</span><br>
+        ├── <span class="s">docs.html</span><span class="c">&nbsp;← This documentation page</span><br>
+        ├── css/ <br>
+        │&emsp;&emsp;└── <span class="s">style.css</span><span class="c">&nbsp;← All styles (dark theme, responsive, lightbox)</span><br>
+        ├── js/ <br>
+        │&emsp;&emsp;└── <span class="s">app.js</span><span class="c">&nbsp;← YAML parser, cards, filters, audio, lightbox</span><br>
+        ├── data/ <br>
+        │&emsp;&emsp;└── <span class="s">songs.yaml</span><span class="c">&nbsp;← ⭐ All song data lives here</span><br>
+        ├── images/ <br>
+        │&emsp;&emsp;└── <span class="s">*.jpg / *.png</span><span class="c">&nbsp;← Cover art (referenced in songs.yaml)</span><br>
+        └── audio/ <br>
+        &nbsp;&emsp;&emsp;└── <span class="s">*.mp3</span><span class="c">&nbsp;← Demo audio files (referenced in songs.yaml)</span></div>
+    </div>
+
+    <!-- ─── Running Locally ─── -->
+    <div id="running-locally" class="docs-section">
+      <h2 class="docs-h2">Running Locally</h2>
+      <p class="docs-p">
+        Because <span class="docs-code">songs.yaml</span> is loaded via
+        <span class="docs-code">fetch()</span>, browsers block requests over the
+        <span class="docs-code">file://</span> protocol. You must serve the site
+        through a local HTTP server.
+      </p>
+
+      <h3 class="docs-h3">Python (built-in, recommended)</h3>
+      <div class="docs-pre"><span class="c"># Python 3</span>
+python3 -m http.server 8080
+
+<span class="c"># Then open:</span>
+http://localhost:8080</div>
+
+      <h3 class="docs-h3">Node.js</h3>
+      <div class="docs-pre">npx serve .</div>
+
+      <div class="docs-callout docs-callout-info">
+        <span class="docs-callout-icon">ℹ</span>
+        <span>Any HTTP server works. The site has no backend dependencies whatsoever.</span>
+      </div>
+    </div>
+
+    <!-- ─── YAML Format ─── -->
+    <div id="yaml-format" class="docs-section">
+      <h2 class="docs-h2">YAML Format</h2>
+      <p class="docs-p">
+        YAML was chosen over JSON for readability — it's far easier to write and
+        edit multi-line lyrics, chord lists, and prose without escaping quotes or
+        worrying about trailing commas.
+      </p>
+      <p class="docs-p">
+        The file at <span class="docs-code">data/songs.yaml</span> contains a
+        single top-level key <span class="docs-code">songs</span> whose value is
+        a list of song objects.
+      </p>
+
+      <div class="docs-pre">
+        <span class="c"># data/songs.yaml</span><br>
+        <span class="k">songs</span><span class="p">:</span><br>
+        <span class="p">-</span> <span class="k">id</span><span class="p">:</span> <span class="s">my-song</span><br>
+        &emsp;<span class="k">artist</span><span class="p">:</span> <span class="s">Artist Name</span><br>
+        &emsp;<span class="k">genre</span><span class="p">:</span> <span class="s">Rock</span><br>
+        &emsp;<span class="k">difficulty</span><span class="p">:</span> <span class="s">Beginner</span><br>
+        &emsp;<span class="k">key</span><span class="p">:</span> <span class="s">G</span><br>
+        &emsp;<span class="k">bpm</span><span class="p">:</span> <span class="n">120</span><br>
+        &emsp;<span class="k">title</span><span class="p">:</span> <span class="s">My Song Title</span><br>
+        &emsp;<span class="k">description</span><span class="p">:</span> <span class="s">A short sentence shown on the card.</span><br>
+        &emsp;<span class="k">coverImage</span><span class="p">:</span> <span class="s">images/my-song.jpg</span><br>
+        &emsp;<span class="k">sections</span><span class="p">:</span> <span class="p">- ...</span>
+      </div>
+
+      <div class="docs-callout docs-callout-tip">
+        <span class="docs-callout-icon">✓</span>
+        <span>Comments start with <span class="docs-code">#</span>. Use them freely to organise the file.</span>
+      </div>
+    </div>
+
+    <!-- ─── Song Fields ─── -->
+    <div id="song-fields" class="docs-section">
+      <h2 class="docs-h2">Song Fields</h2>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>id</td><td>string</td><td>Unique slug. Use lowercase with hyphens, e.g. <span class="docs-code">hotel-california</span>.</td></tr>
+          <tr><td>title</td><td>string</td><td>Full song title displayed on the card and detail panel.</td></tr>
+          <tr><td>artist</td><td>string</td><td>Artist or band name shown above the title.</td></tr>
+          <tr><td>genre</td><td>string</td><td>Genre label. Used to generate filter buttons automatically.</td></tr>
+          <tr><td>difficulty</td><td>string</td><td><span class="docs-code">Beginner</span>, <span class="docs-code">Intermediate</span>, or <span class="docs-code">Advanced</span>. Controls the badge colour.</td></tr>
+          <tr><td>key</td><td>string</td><td>Musical key, e.g. <span class="docs-code">G</span>, <span class="docs-code">Em</span>, <span class="docs-code">Bm</span>.</td></tr>
+          <tr><td>bpm</td><td>number</td><td>Tempo in beats per minute. Shown in the metadata strip.</td></tr>
+          <tr><td>description</td><td>string</td><td>Two-line max description shown on the card preview.</td></tr>
+          <tr><td>coverImage</td><td>string</td><td>Relative path to the cover image, e.g. <span class="docs-code">images/cover.jpg</span>. Optional — a key-letter placeholder shows if omitted.</td></tr>
+          <tr><td>sections</td><td>list</td><td>Ordered list of content sections displayed in the detail panel.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ─── Adding Songs ─── -->
+    <div id="adding-songs" class="docs-section">
+      <h2 class="docs-h2">Adding a Song</h2>
+      <div class="docs-steps">
+        <div class="docs-step">
+          <div class="docs-step-num">01</div>
+          <div class="docs-step-body">
+            <strong>Open <span class="docs-code">data/songs.yaml</span></strong>
+            <span>Add a new <span class="docs-code">-</span> item under the <span class="docs-code">songs:</span> key with the fields listed above.</span>
+          </div>
+        </div>
+        <div class="docs-step">
+          <div class="docs-step-num">02</div>
+          <div class="docs-step-body">
+            <strong>Drop your files into place</strong>
+            <span>Put cover images in <span class="docs-code">images/</span> and audio demos in <span class="docs-code">audio/</span>. File names must match what you wrote in the YAML.</span>
+          </div>
+        </div>
+        <div class="docs-step">
+          <div class="docs-step-num">03</div>
+          <div class="docs-step-body">
+            <strong>Refresh the browser</strong>
+            <span>The new card appears in the grid instantly. No build step, no restart.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-callout docs-callout-warn">
+        <span class="docs-callout-icon">⚠</span>
+        <span>YAML is indentation-sensitive. Use 2-space indents consistently. Tabs are not allowed.</span>
+      </div>
+    </div>
+
+    <!-- ─── Section Types ─── -->
+    <div id="section-types" class="docs-section">
+      <h2 class="docs-h2">Section Types</h2>
+      <p class="docs-p">
+        Each song's <span class="docs-code">sections</span> list can contain any
+        combination of the five types below, in any order, repeated as many times
+        as needed.
+      </p>
+      <table class="docs-table">
+        <thead>
+          <tr><th>Type</th><th>Purpose</th><th>Required fields</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>text</td><td>Plain prose paragraph — about the song, technique notes, history.</td><td>heading, content</td></tr>
+          <tr><td>chords</td><td>Chord names displayed with syntax highlighting. Chord tokens (e.g. G, Am) are auto-highlighted.</td><td>heading, content</td></tr>
+          <tr><td>lyrics</td><td>Lyrics with inline chord markers. Wrap chords in square brackets: <span class="docs-code">[G]</span></td><td>heading, content</td></tr>
+          <tr><td>audio</td><td>Custom audio player with progress bar. Supports any number per song.</td><td>heading, src</td></tr>
+          <tr><td>image</td><td>Inline image with skeleton loading, hover zoom hint, and click-to-lightbox.</td><td>heading, src</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ─── text ─── -->
+    <div id="sec-text" class="docs-section">
+      <h2 class="docs-h2">Section: <span style="color:var(--accent)">text</span></h2>
+      <p class="docs-p">Use for any prose content — song history, technique descriptions, strumming patterns written out in plain text.</p>
+      <div class="docs-pre">
+        <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">text</span><br>
+        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">About This Song</span><br>
+        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">&gt;</span><br>
+        &emsp;&emsp;<span class="s">Written in 1968, this song was inspired by J.S. Bach's</span> <span class="s">Bourrée in E minor. &emsp;&emsp;The fingerpicking pattern...</span>
+      </div>
+      <div class="docs-callout docs-callout-info">
+        <span class="docs-callout-icon">ℹ</span>
+        <span>The <span class="docs-code">&gt;</span> block scalar folds newlines into spaces, producing a single paragraph. Use <span class="docs-code">|</span> to preserve line breaks.</span>
+      </div>
+    </div>
+
+    <!-- ─── chords ─── -->
+    <div id="sec-chords" class="docs-section">
+      <h2 class="docs-h2">Section: <span style="color:var(--accent)">chords</span></h2>
+      <p class="docs-p">
+        Lists chords with automatic syntax highlighting. Any standard chord name
+        (<span class="docs-code">G</span>, <span class="docs-code">Am</span>,
+        <span class="docs-code">F#m</span>, <span class="docs-code">Dsus4</span>,
+        <span class="docs-code">C/E</span>) is wrapped in a gold badge automatically.
+      </p>
+      <div class="docs-pre">
+        <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">chords</span><br>
+        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chords Used</span><br>
+        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span> <span class="s">G | D | Em | C</span> 
+        <span class="s">All open chords in the key of G. <br>&emsp;No capo required.</span>
+      </div>
+    </div>
+
+    <!-- ─── lyrics ─── -->
+    <div id="sec-lyrics" class="docs-section">
+      <h2 class="docs-h2">Section: <span style="color:var(--accent)">lyrics</span></h2>
+      <p class="docs-p">
+        Lyrics with inline chord markers. Wrap chord names in square brackets
+        immediately before the syllable they fall on. Line breaks are preserved.
+      </p>
+      <div class="docs-pre">
+        <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">lyrics</span><br>
+        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Verse 1</span><br>
+        &emsp;<span class="k">content</span><span class="p">:</span> <span class="p">|</span>
+        &emsp;<span class="s">[G]Blackbird singing in the [Am]dead of night</span><br>
+        &emsp;<span class="s">[G/B]Take these [C]broken wings and learn to [D]fly</span>
+      </div>
+      <div class="docs-callout docs-callout-tip">
+        <span class="docs-callout-icon">✓</span>
+        <span>Use the <span class="docs-code">|</span> literal block scalar so each line is preserved exactly. You can add blank lines between sections.</span>
+      </div>
+    </div>
+
+    <!-- ─── audio ─── -->
+    <div id="sec-audio" class="docs-section">
+      <h2 class="docs-h2">Section: <span style="color:var(--accent)">audio</span></h2>
+      <p class="docs-p">
+        Renders a custom audio player with a play/pause button, progress bar, and
+        elapsed/total time. You can add multiple audio sections per song.
+      </p>
+      <div class="docs-pre">
+        <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">audio</span><br>
+        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">"Demo Track – Verse"</span><br>
+        &emsp;<span class="k">description</span><span class="p">:</span> <span class="s">Strummed arrangement at 87 BPM.</span><br>
+        &emsp;<span class="k">src</span><span class="p">:</span> <span class="s">audio/my-song-verse.mp3</span>
+      </div>
+      <p class="docs-p" style="margin-top:16px;">
+        Place <span class="docs-code">.mp3</span> files in the <span class="docs-code">audio/</span> folder. If a file is missing, the player shows a warning notice instead of breaking.
+      </p>
+      <div class="docs-callout docs-callout-warn">
+        <span class="docs-callout-icon">⚠</span>
+        <span>Only one audio track plays at a time. Opening a new track auto-pauses the previous one.</span>
+      </div>
+    </div>
+
+    <!-- ─── image ─── -->
+    <div id="sec-image" class="docs-section">
+      <h2 class="docs-h2">Section: <span style="color:var(--accent)">image</span></h2>
+      <p class="docs-p">
+        Displays an image inside the detail panel. Images load progressively with a
+        shimmer skeleton and open in a fullscreen lightbox when clicked.
+      </p>
+      <div class="docs-pre">
+        <span class="p">-</span> <span class="k">type</span><span class="p">:</span> <span class="s">image</span><br>
+        &emsp;<span class="k">heading</span><span class="p">:</span> <span class="s">Chord Diagram</span><br>
+        &emsp;<span class="k">caption</span><span class="p">:</span> <span class="s">Finger position for the F#m barre chord.</span>  <span class="c"># optional</span><br>
+        &emsp;<span class="k">src</span><span class="p">:</span> <span class="s">images/fsharp-minor-diagram.png</span>
+      </div>
+    </div>
+
+    <!-- ─── Image optimisation ─── -->
+    <div id="image-optimization" class="docs-section">
+      <h2 class="docs-h2">Image Optimisation</h2>
+      <p class="docs-p">
+        Card images use an <span class="docs-code">IntersectionObserver</span> to
+        defer loading until each card scrolls into the viewport (with a 200 px
+        lookahead margin). This prevents the page from fetching images that the
+        user may never scroll to, which eliminates the stuttering caused by many
+        large images loading simultaneously on page load.
+      </p>
+      <p class="docs-p">
+        While an image is loading, a shimmer skeleton animation fills the
+        placeholder. Once the image loads, it fades in smoothly and the skeleton
+        fades out. If loading fails, a key-letter placeholder is shown instead.
+      </p>
+      <div class="docs-callout docs-callout-tip">
+        <span class="docs-callout-icon">✓</span>
+        <span>For best results, export cover images at <strong>800 × 450 px</strong> (16:9) and save as JPEG at 80% quality. This keeps file sizes under 100 KB while maintaining visual quality.</span>
+      </div>
+    </div>
+
+    <!-- ─── Lightbox ─── -->
+    <div id="lightbox" class="docs-section">
+      <h2 class="docs-h2">Lightbox &amp; Zoom</h2>
+      <p class="docs-p">
+        Any <span class="docs-code">image</span> section can be clicked to open a
+        fullscreen lightbox. The lightbox:
+      </p>
+      <ul style="margin:0 0 20px 0;padding-left:24px;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--text-muted);">
+        <li>Shows a shimmer skeleton while the full-size image loads</li>
+        <li>Fades the image in once loaded</li>
+        <li>Allows mild zoom on hover (further in-place zoom)</li>
+        <li>Closes on backdrop click, close button, or <span class="docs-code">Escape</span> key</li>
+        <li>Displays an optional caption from the section's <span class="docs-code">heading</span> field</li>
+      </ul>
+      <div class="docs-callout docs-callout-info">
+        <span class="docs-callout-icon">ℹ</span>
+        <span>The lightbox overlays the detail panel, not the entire page, so the panel scroll position is preserved when the lightbox is closed.</span>
+      </div>
+    </div>
+
+    <!-- ─── Filters ─── -->
+    <div id="filters" class="docs-section">
+      <h2 class="docs-h2">Filters</h2>
+      <p class="docs-p">
+        Filter buttons are generated automatically by scanning all unique
+        <span class="docs-code">genre</span> and <span class="docs-code">difficulty</span>
+        values in <span class="docs-code">songs.yaml</span>. You never need to
+        edit any HTML or JavaScript to add a new filter — just add a new genre or
+        difficulty to a song entry and the button appears.
+      </p>
+    </div>
+
+    <!-- ─── Audio Player ─── -->
+    <div id="audio-player" class="docs-section">
+      <h2 class="docs-h2">Audio Player</h2>
+      <p class="docs-p">
+        The audio player is fully custom-built. Features include:
+      </p>
+      <ul style="margin:0 0 20px 0;padding-left:24px;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--text-muted);">
+        <li>Clickable progress bar for seeking</li>
+        <li>Elapsed / total time display</li>
+        <li>Auto-stop of previous track when a new one starts</li>
+        <li>Graceful warning if the audio file is missing</li>
+        <li>All players stop when the detail panel is closed</li>
+      </ul>
+    </div>
+
+    <!-- ─── Deployment ─── -->
+    <div id="deployment" class="docs-section">
+      <h2 class="docs-h2">Deployment</h2>
+      <p class="docs-p">
+        Upload the entire project folder to any static host. No server-side
+        processing is needed.
+      </p>
+
+      <h3 class="docs-h3">GitHub Pages</h3>
+      <div class="docs-pre"><span class="c"># Push to a GitHub repo, then enable Pages in Settings → Pages</span> <br>
+        git init <br>
+        git add . <br>
+        git commit -m "Initial RMCLib site" <br>
+        git remote add origin https://github.com/you/rmclib.git <br>
+        git push -u origin main
+      </div>
+
+      <h3 class="docs-h3">Netlify (drag &amp; drop)</h3>
+      <p class="docs-p">Drag the project folder onto <a href="https://app.netlify.com" style="color:var(--accent);">app.netlify.com</a>. Done.</p>
+
+      <h3 class="docs-h3">Vercel</h3>
+      <div class="docs-pre">npx vercel</div>
+
+      <div class="docs-callout docs-callout-info">
+        <span class="docs-callout-icon">ℹ</span>
+        <span>All static hosts (GitHub Pages, Netlify, Vercel, Cloudflare Pages, any web server) work with no configuration. There is nothing to compile or build.</span>
+      </div>
+    </div>
+
+    <!-- ─── Custom Logo ─── -->
+    <div id="custom-logo" class="docs-section">
+      <h2 class="docs-h2">Custom Logo</h2>
+      <p class="docs-p">
+        The header and footer currently use an inline SVG guitar icon. To replace
+        it with your own logo image:
+      </p>
+      <div class="docs-steps">
+        <div class="docs-step">
+          <div class="docs-step-num">01</div>
+          <div class="docs-step-body">
+            <strong>Place your logo file</strong>
+            <span>Save it as <span class="docs-code">images/logo.png</span> (or <span class="docs-code">.svg</span>). Recommended size: 72 × 72 px, transparent background.</span>
+          </div>
+        </div>
+        <div class="docs-step">
+          <div class="docs-step-num">02</div>
+          <div class="docs-step-body">
+            <strong>Replace the SVG block in index.html and docs.html</strong>
+            <span>Find every <span class="docs-code">&lt;svg class="logo-img-svg"&gt;</span> block and replace it with:<br>
+            <span class="docs-code">&lt;img class="logo-img" src="images/logo.png" alt="RMCLib logo"&gt;</span></span>
+          </div>
+        </div>
+        <div class="docs-step">
+          <div class="docs-step-num">03</div>
+          <div class="docs-step-body">
+            <strong>That's it</strong>
+            <span>The <span class="docs-code">.logo-img</span> CSS class already sizes and aligns it correctly.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo logo-lg">
+      <img src="logo.svg" alt="RMC Logo" class="logo-img">
+        <div class="logo-text-wrap">
+          <span class="logo-mark">RMC<span>Lib</span></span>
+          <span class="logo-sub">Rakhine&nbsp;Music&nbsp;&amp;&nbsp;Chord&nbsp;Library</span>
+        </div>
+      </a>
+      <p>A YAML-powered guitar chord and lyrics library. Open, editable, and endlessly expandable.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Library</h4>
+      <ul>
+        <li><a href="index.html#songs">All Songs</a></li>
+        <li><a href="index.html#songs">Beginner</a></li>
+        <li><a href="index.html#songs">Intermediate</a></li>
+        <li><a href="index.html#songs">Advanced</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Documentation</h4>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#adding-songs">Adding Songs</a></li>
+        <li><a href="#section-types">Section Types</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Site</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#songs">Browse Songs</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 RMCLib — Rakhine Music &amp; Chord Library. Song copyrights belong to their respective owners.</p>
+    <p>Built with HTML · CSS · Vanilla JS · Bootstrap 5</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ── Mobile nav ── */
+const toggle = document.getElementById('navToggle');
+const nav = document.querySelector('.main-nav');
+toggle?.addEventListener('click', () => {
+  const open = toggle.classList.toggle('open');
+  nav.classList.toggle('open', open);
+  toggle.setAttribute('aria-expanded', open);
+});
+
+/* ── Header scroll ── */
+window.addEventListener('scroll', () => {
+  document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ── Sidebar active link tracking ── */
+const sections = document.querySelectorAll('.docs-section[id]');
+const links    = document.querySelectorAll('.sidebar-link');
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sidebar-link[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
